@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GiftLife - Analytics Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #0f0f1a; color: #fff; min-height: 100vh; }
+    .navbar { background: #1a1a2e; padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e05c9733; }
+    .navbar .logo { color: #e05c97; font-size: 1.5rem; font-weight: 600; text-decoration: none; }
+    .navbar a { color: #ccc; text-decoration: none; margin-left: 24px; font-size: 0.95rem; transition: color 0.2s; }
+    .navbar a:hover { color: #e05c97; }
+    .page-header { text-align: center; padding: 40px 20px 20px; }
+    .page-header h1 { font-size: 2rem; color: #e05c97; }
+    .page-header p { color: #aaa; margin-top: 6px; font-size: 0.95rem; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px 40px; }
+    .card { background: #1a1a2e; border-radius: 16px; padding: 28px 20px; text-align: center; border: 1px solid #e05c9733; transition: transform 0.2s; }
+    .card:hover { transform: translateY(-4px); }
+    .card .value { font-size: 2.8rem; font-weight: 600; color: #e05c97; }
+    .card .label { color: #aaa; margin-top: 8px; font-size: 0.9rem; }
+    .card.blue .value { color: #6c63ff; }
+    .card.green .value { color: #00c9a7; }
+    .card.orange .value { color: #f39c12; }
+    .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 30px; padding: 10px 40px 40px; }
+    .chart-box { background: #1a1a2e; border-radius: 16px; padding: 28px; border: 1px solid #e05c9733; }
+    .chart-box h3 { color: #e05c97; margin-bottom: 20px; font-size: 1rem; }
+    .activity-section { padding: 0 40px 40px; }
+    .activity-box { background: #1a1a2e; border-radius: 16px; padding: 28px; border: 1px solid #e05c9733; }
+    .activity-box h3 { color: #e05c97; margin-bottom: 16px; }
+    .activity-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #ffffff11; font-size: 0.9rem; color: #ccc; }
+    .activity-item:last-child { border-bottom: none; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #e05c97; flex-shrink: 0; }
+    .dot.blue { background: #6c63ff; }
+    .dot.green { background: #00c9a7; }
+    .loading { text-align: center; padding: 60px; color: #aaa; font-size: 1.1rem; }
+    .refresh-badge { text-align: center; color: #555; font-size: 0.8rem; padding-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="admin_dashboard.html" class="logo">💓 GiftLife</a>
+    <div>
+      <a href="admin_dashboard.html">Dashboard</a>
+      <a href="analytics.html" style="color:#e05c97;">📊 Analytics</a>
+      <a href="index.html">Logout</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>📊 Analytics Dashboard</h1>
+    <p>Live platform statistics — auto-refreshes every 30 seconds</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="value" id="totalUsers">—</div>
+      <div class="label">Total Users</div>
+    </div>
+    <div class="card blue">
+      <div class="value" id="totalDonors">—</div>
+      <div class="label">Total Donors</div>
+    </div>
+    <div class="card green">
+      <div class="value" id="totalRecipients">—</div>
+      <div class="label">Total Recipients</div>
+    </div>
+    <div class="card orange">
+      <div class="value" id="matchRate">—</div>
+      <div class="label">Match Success Rate</div>
+    </div>
+  </div>
+
+  <div class="charts">
+    <div class="chart-box">
+      <h3>👥 Donors vs Recipients</h3>
+      <canvas id="donutChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3>📈 Platform Overview</h3>
+      <canvas id="barChart"></canvas>
+    </div>
+  </div>
+
+  <div class="activity-section">
+    <div class="activity-box">
+      <h3>⚡ Live Activity Feed</h3>
+      <div id="activityFeed"><div class="loading">Loading activity...</div></div>
+    </div>
+  </div>
+
+  <div class="refresh-badge" id="lastUpdated">Fetching data...</div>
+
+  <script>
+    let donutChart = null;
+    let barChart = null;
+
+    async function loadAnalytics() {
+      try {
+        const res = await fetch('http://localhost:8080/admin/analytics');
+        const data = await res.json();
+
+        document.getElementById('totalUsers').textContent = data.totalUsers;
+        document.getElementById('totalDonors').textContent = data.totalDonors;
+        document.getElementById('totalRecipients').textContent = data.totalRecipients;
+        document.getElementById('matchRate').textContent = data.matchSuccessRate + '%';
+
+        if (donutChart) donutChart.destroy();
+        donutChart = new Chart(document.getElementById('donutChart'), {
+          type: 'doughnut',
+          data: {
+            labels: ['Donors', 'Recipients'],
+            datasets: [{ data: [data.totalDonors, data.totalRecipients], backgroundColor: ['#e05c97', '#6c63ff'], borderWidth: 0 }]
+          },
+          options: { plugins: { legend: { labels: { color: '#fff', font: { family: 'Poppins' } } } } }
+        });
+
+        if (barChart) barChart.destroy();
+        barChart = new Chart(document.getElementById('barChart'), {
+          type: 'bar',
+          data: {
+            labels: ['Total Users', 'Donors', 'Recipients', 'Matches', 'Success %'],
+            datasets: [{ label: 'Platform Stats', data: [data.totalUsers, data.totalDonors, data.totalRecipients, data.totalMatches, data.matchSuccessRate], backgroundColor: ['#e05c97', '#6c63ff', '#00c9a7', '#f39c12', '#3498db'], borderRadius: 8, borderWidth: 0 }]
+          },
+          options: {
+            plugins: { legend: { labels: { color: '#fff', font: { family: 'Poppins' } } } },
+            scales: { x: { ticks: { color: '#aaa' }, grid: { color: '#ffffff11' } }, y: { ticks: { color: '#aaa' }, grid: { color: '#ffffff11' } } }
+          }
+        });
+
+        document.getElementById('activityFeed').innerHTML = `
+          <div class="activity-item"><div class="dot"></div> Platform has ${data.totalUsers} registered users</div>
+          <div class="activity-item"><div class="dot blue"></div> ${data.totalDonors} donors registered on the platform</div>
+          <div class="activity-item"><div class="dot green"></div> ${data.totalRecipients} recipients awaiting organ matches</div>
+          <div class="activity-item"><div class="dot"></div> ${data.totalMatches} successful matches completed</div>
+          <div class="activity-item"><div class="dot green"></div> Current match success rate: ${data.matchSuccessRate}%</div>
+        `;
+
+        document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleTimeString()} — auto-refreshes every 30 seconds`;
+
+      } catch (err) {
+        document.getElementById('activityFeed').innerHTML = '<div class="loading">⚠️ Could not load data. Make sure the backend is running on port 8080.</div>';
+      }
+    }
+
+    loadAnalytics();
+    setInterval(loadAnalytics, 30000);
+  </script>
+</body>
+</html>
