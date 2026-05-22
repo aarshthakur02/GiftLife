@@ -17,7 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function fetchRecipientStatus() {
         showLoading(statusContainer);
 
+<<<<<<< HEAD
         fetch("https://organs-donation-website-production.up.railway.app/recipient/all")
+=======
+        fetch("http://localhost:8080/recipient/all")
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => response.json())
             .then(data => {
                 console.log("Fetched Recipient Data:", data); // Debugging Step
@@ -42,7 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function fetchMatchingUpdates() {
         showLoading(matchesContainer);
 
+<<<<<<< HEAD
         fetch("https://organs-donation-website-production.up.railway.app/matching/all")
+=======
+        fetch("http://localhost:8080/matching/all")
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => response.json())
             .then(data => {
                 console.log("Fetched Matching Data:", data); // Debugging Step

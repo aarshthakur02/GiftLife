@@ -6,7 +6,11 @@ if (!userId) {
 } else {
     // Function to fetch unread notifications
     function fetchNotifications() {
+<<<<<<< HEAD
         fetch(`https://organs-donation-website-production.up.railway.app/api/notifications/unread/${userId}`)
+=======
+        fetch(`http://localhost:8080/api/notifications/unread/${userId}`)
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -45,7 +49,11 @@ if (!userId) {
 
     // Function to mark a notification as read
     function markAsRead(notificationId) {
+<<<<<<< HEAD
         fetch(`https://organs-donation-website-production.up.railway.app/api/notifications/read/${notificationId}`, {
+=======
+        fetch(`http://localhost:8080/api/notifications/read/${notificationId}`, {
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             method: "PUT"
         })
         .then(response => {

@@ -17,7 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Load available users
     function loadUsers() {
+<<<<<<< HEAD
         fetch("https://organs-donation-website-production.up.railway.app/api/users/all")
+=======
+        fetch("http://localhost:8080/api/users/all")
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => response.json())
             .then(users => {
                 console.log("Users fetched:", users);
@@ -56,7 +60,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadChat() {
         if (!selectedReceiverId) return;
 
+<<<<<<< HEAD
         fetch(`https://organs-donation-website-production.up.railway.app/api/chats/history?user1Id=${userData.id}&user2Id=${selectedReceiverId}`)
+=======
+        fetch(`http://localhost:8080/api/chats/history?user1Id=${userData.id}&user2Id=${selectedReceiverId}`)
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => response.json())
             .then(messages => {
                 console.log("Messages fetched:", messages);
@@ -82,7 +90,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+<<<<<<< HEAD
         fetch("https://organs-donation-website-production.up.railway.app/api/chats/send", {
+=======
+        fetch("http://localhost:8080/api/chats/send", {
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

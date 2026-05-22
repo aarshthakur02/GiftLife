@@ -79,7 +79,11 @@ document.addEventListener("DOMContentLoaded", function() {
     async function fetchNotifications(userId) {
       try {
         // Replace the URL with your actual API endpoint
+<<<<<<< HEAD
         const response = await fetch(`https://organs-donation-website-production.up.railway.app/api/notifications/${userId}`);
+=======
+        const response = await fetch(`http://localhost:8080/api/notifications/${userId}`);
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
         if (!response.ok) {
           throw new Error("Failed to fetch notifications");
         }
@@ -93,7 +97,11 @@ document.addEventListener("DOMContentLoaded", function() {
           // On click, mark the notification as read
           li.addEventListener("click", async function() {
             try {
+<<<<<<< HEAD
               await fetch(`https://organs-donation-website-production.up.railway.app/api/notifications/read/${notification.id}`, {
+=======
+              await fetch(`http://localhost:8080/api/notifications/read/${notification.id}`, {
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
                 method: "PUT"
               });
               // Visual update to show it is read (optional)

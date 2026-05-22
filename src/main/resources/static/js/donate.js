@@ -40,7 +40,11 @@ document.getElementById("donateForm").addEventListener("submit", function (e) {
     }
   
     // Call the donation API endpoint
+<<<<<<< HEAD
     fetch("https://organs-donation-website-production.up.railway.app/donor/donate", {
+=======
+    fetch("http://localhost:8080/donor/donate", {
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -16,7 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
     function fetchDonorStatus() {
+<<<<<<< HEAD
         fetch(`https://organs-donation-website-production.up.railway.app/donor/all`)
+=======
+        fetch(`http://localhost:8080/donor/all`)
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => response.json())
             .then(data => {
                 console.log("Fetched Donor Data:", data); // Debugging Step
@@ -40,7 +44,11 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error("Error fetching donor status:", error));
     }
     
+<<<<<<< HEAD
     fetch("https://organs-donation-website-production.up.railway.app/matching/all")
+=======
+    fetch("http://localhost:8080/matching/all")
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
     .then(response => response.json())
     .then(data => {
         console.log("Fetched Matches Data:", data); // Debugging

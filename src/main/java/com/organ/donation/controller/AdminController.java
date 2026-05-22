@@ -1,17 +1,23 @@
 package com.organ.donation.controller;
 
+<<<<<<< HEAD
 import com.organ.donation.repository.UserRepository;
 import com.organ.donation.repository.DonorRepository;
 import com.organ.donation.repository.RecipientRepository;
 import com.organ.donation.repository.MatchesRepository;
+=======
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
 import com.organ.donation.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
 
+=======
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -19,6 +25,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+<<<<<<< HEAD
     @Autowired
     private UserRepository userRepository;
 
@@ -47,6 +54,8 @@ public class AdminController {
         return ResponseEntity.ok(analytics);
     }
 
+=======
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
     @PutMapping("/verify/donor/{donorId}")
     public ResponseEntity<String> verifyDonor(@PathVariable Long donorId) {
         return ResponseEntity.ok(adminService.verifyDonor(donorId));

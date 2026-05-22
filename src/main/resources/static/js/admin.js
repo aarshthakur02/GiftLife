@@ -11,7 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const pendingRecipientsDiv = document.getElementById("pendingRecipients");
 
     function fetchPendingUsers() {
+<<<<<<< HEAD
         fetch("https://organs-donation-website-production.up.railway.app/donor/all")
+=======
+        fetch("http://localhost:8080/donor/all")
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => response.json())
             .then(donors => {
                 pendingDonorsDiv.innerHTML = donors
@@ -27,7 +31,11 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => console.error("Error fetching donors:", error));
 
+<<<<<<< HEAD
         fetch("https://organs-donation-website-production.up.railway.app/recipient/all")
+=======
+        fetch("http://localhost:8080/recipient/all")
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => response.json())
             .then(recipients => {
                 pendingRecipientsDiv.innerHTML = recipients
@@ -45,7 +53,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function verifyDonor(donorId) {
+<<<<<<< HEAD
         fetch(`https://organs-donation-website-production.up.railway.app/admin/verify/donor/${donorId}`, { method: "PUT" })
+=======
+        fetch(`http://localhost:8080/admin/verify/donor/${donorId}`, { method: "PUT" })
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => response.text())
             .then(message => {
                 alert(message);
@@ -55,7 +67,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function rejectDonor(donorId) {
+<<<<<<< HEAD
         fetch(`https://organs-donation-website-production.up.railway.app/admin/reject/donor/${donorId}`, { method: "PUT" })
+=======
+        fetch(`http://localhost:8080/admin/reject/donor/${donorId}`, { method: "PUT" })
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => response.text())
             .then(message => {
                 alert(message);
@@ -65,7 +81,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function verifyRecipient(recipientId) {
+<<<<<<< HEAD
         fetch(`https://organs-donation-website-production.up.railway.app/admin/verify/recipient/${recipientId}`, { method: "PUT" })
+=======
+        fetch(`http://localhost:8080/admin/verify/recipient/${recipientId}`, { method: "PUT" })
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => response.text())
             .then(message => {
                 alert(message);
@@ -75,7 +95,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function rejectRecipient(recipientId) {
+<<<<<<< HEAD
         fetch(`https://organs-donation-website-production.up.railway.app/admin/reject/recipient/${recipientId}`, { method: "PUT" })
+=======
+        fetch(`http://localhost:8080/admin/reject/recipient/${recipientId}`, { method: "PUT" })
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => response.text())
             .then(message => {
                 alert(message);

@@ -10,7 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const matchesList = document.getElementById("matchesList");
 
     function findMatches() {
+<<<<<<< HEAD
         fetch(`https://organs-donation-website-production.up.railway.app/matching/find?recipientId=${userData.id}`, {
+=======
+        fetch(`http://localhost:8080/matching/find?recipientId=${userData.id}`, {
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             method: "POST"
         })
         .then(response => response.text())
@@ -22,7 +26,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function loadMatches() {
+<<<<<<< HEAD
         fetch("https://organs-donation-website-production.up.railway.app/matching/all")
+=======
+        fetch("http://localhost:8080/matching/all")
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             .then(response => response.json())
             .then(matches => {
                 if (matches.length === 0) {

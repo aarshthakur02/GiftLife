@@ -17,7 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Fetch Donor Requests and update pending count
     function fetchDonorRequests() {
+<<<<<<< HEAD
       fetch("https://organs-donation-website-production.up.railway.app/donor/all")
+=======
+      fetch("http://localhost:8080/donor/all")
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
         .then(response => response.json())
         .then(data => {
           // Filter pending donor requests (assuming 'status' property exists)
@@ -42,7 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Fetch Recipient Requests and update pending count
     function fetchRecipientRequests() {
+<<<<<<< HEAD
       fetch("https://organs-donation-website-production.up.railway.app/recipient/all")
+=======
+      fetch("http://localhost:8080/recipient/all")
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
         .then(response => response.json())
         .then(data => {
           // Filter pending recipient requests (assuming 'status' property exists)
@@ -67,7 +75,11 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Function to Verify Donor using the provided API endpoint
     window.verifyDonor = function (donorId) {
+<<<<<<< HEAD
       fetch(`https://organs-donation-website-production.up.railway.app/admin/verify/donor/${donorId}`, {
+=======
+      fetch(`http://localhost:8080/admin/verify/donor/${donorId}`, {
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
         method: "PUT",
         headers: { "Content-Type": "application/json" }
       })
@@ -82,7 +94,11 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Function to Reject Donor using the provided API endpoint
     window.rejectDonor = function (donorId) {
+<<<<<<< HEAD
       fetch(`https://organs-donation-website-production.up.railway.app/admin/reject/donor/${donorId}`, {
+=======
+      fetch(`http://localhost:8080/admin/reject/donor/${donorId}`, {
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
         method: "PUT",
         headers: { "Content-Type": "application/json" }
       })
@@ -96,7 +112,11 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Function to Verify Recipient using the provided API endpoint
     window.verifyRecipient = function (recipientId) {
+<<<<<<< HEAD
       fetch(`https://organs-donation-website-production.up.railway.app/admin/verify/recipient/${recipientId}`, {
+=======
+      fetch(`http://localhost:8080/admin/verify/recipient/${recipientId}`, {
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
         method: "PUT",
         headers: { "Content-Type": "application/json" }
       })
@@ -115,7 +135,11 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Function to Reject Recipient using the provided API endpoint
     window.rejectRecipient = function (recipientId) {
+<<<<<<< HEAD
       fetch(`https://organs-donation-website-production.up.railway.app/admin/reject/recipient/${recipientId}`, {
+=======
+      fetch(`http://localhost:8080/admin/reject/recipient/${recipientId}`, {
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
         method: "PUT",
         headers: { "Content-Type": "application/json" }
       })

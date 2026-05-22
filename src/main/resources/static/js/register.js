@@ -39,7 +39,11 @@ document.getElementById("registerForm").addEventListener("submit", async functio
   registerBtn.disabled = true;
 
   try {
+<<<<<<< HEAD
     const response = await fetch("https://organs-donation-website-production.up.railway.app/auth/register", {
+=======
+    const response = await fetch("http://localhost:8080/auth/register", {
+>>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
       method: "POST",
       headers: {
         "Content-Type": "application/json"
