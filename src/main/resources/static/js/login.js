@@ -14,11 +14,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     loginBtn.disabled = true;
   
     try {
-<<<<<<< HEAD
-      const response = await fetch("https://organs-donation-website-production.up.railway.app/auth/login", {
-=======
       const response = await fetch("http://localhost:8080/auth/login", {
->>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
@@ -40,5 +36,4 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
   
     loginBtn.innerHTML = "Sign In";
     loginBtn.disabled = false;
-  });
-  
+});

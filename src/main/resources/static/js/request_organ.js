@@ -18,11 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
             bloodType: bloodType
         };
 
-<<<<<<< HEAD
-        fetch(`https://organs-donation-website-production.up.railway.app/recipient/request?userId=${userData.id}`, {
-=======
         fetch(`http://localhost:8080/recipient/request?userId=${userData.id}`, {
->>>>>>> 76a15d64b9c7d35b619d95400750348aebf7daaa
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
